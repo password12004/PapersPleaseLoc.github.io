@@ -24,7 +24,7 @@ function DivCap(elems, doneFunc, errorFunc)
             // tell extension to take a screenshot after a short delay
             window.setTimeout(function() {
                 chrome.runtime.sendMessage(
-                    "bgigfngpiapeiicnamikpicikekkjcpi",
+                    "elonehokecjmgaimdiidiegfaghjlegj",
                     {name: 'screenshot'}, 
                     (s) => handleChromeResponse.bind(self, elem, s["screenshotUrl"])()
                 );
