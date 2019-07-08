@@ -1,5 +1,7 @@
 function DivCap(elems, doneFunc, errorFunc)
 {
+    var ext = prompt("Please your extension ID Here: ");
+    this.ext = ext;
     this.elems = elems;
     //this.elems = elems.slice(0,4);
     this.zip = new JSZip();
@@ -18,13 +20,14 @@ function DivCap(elems, doneFunc, errorFunc)
         var elem = this.elems.pop();
         if (elem != null)
         {
+            var ext = this.ext;
             var self = this;
             //$("body").scrollTop(elem.offset().top + -10);
             window.scrollTo(0, elem.offset().top - 10)
             // tell extension to take a screenshot after a short delay
             window.setTimeout(function() {
                 chrome.runtime.sendMessage(
-                    "elonehokecjmgaimdiidiegfaghjlegj",
+                    ext,
                     {name: 'screenshot'}, 
                     (s) => handleChromeResponse.bind(self, elem, s["screenshotUrl"])()
                 );
