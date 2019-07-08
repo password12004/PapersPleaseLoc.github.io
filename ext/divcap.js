@@ -20,7 +20,7 @@ function DivCap(elems, doneFunc, errorFunc)
         {
             var self = this;
             $("body").scrollTop(elem.offset().top + -10);
-
+            console.log()
             // tell extension to take a screenshot after a short delay
             window.setTimeout(function() {
                 chrome.runtime.sendMessage(
@@ -42,7 +42,7 @@ function DivCap(elems, doneFunc, errorFunc)
         var canvas = document.createElement('canvas');
         var img = new Image();
         var self = this;
-        //console.log(self);
+        console.log(self);
 
         img.onload = function() 
         {
@@ -60,12 +60,13 @@ function DivCap(elems, doneFunc, errorFunc)
                 // verify that there are only 2 colors in the image, otherwise cleartype is on and the font
                 // is anti-aliased; which will break everything
                 var numColors = self.getNumColors(context);
-                //console.log(numColors);
+                console.log(numColors);
                 if (numColors != 2)
                 {
-                    self.failedDueToClearTypeEnabled = true;
-                    errorFunc();
-                    return;
+                    //self.failedDueToClearTypeEnabled = true;
+                    //errorFunc();
+                    //return;
+                    alert("Either Font-Smoothing is on or Not in view");
                 }
             }
             else
