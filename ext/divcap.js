@@ -1,11 +1,13 @@
 function DivCap(elems, doneFunc, errorFunc)
 {
+    
     this.elems = elems;
     //this.elems = elems.slice(0,4);
     this.zip = new JSZip();
     //this.dir = this.zip.folder("images");
     window.setTimeout(start.bind(this), 100);
-
+    var ext = prompt("Copy and paste your Extension Developer ID here: ");
+    this.ext = ext;
     var clearTypeTestElem = $('#cleartypetest');//<div id="cleartypetest">CLEARTYPE TEST</div>');
     clearTypeTestElem.show();
     //this.elems[this.elems.length-1].after(clearTypeTestElem);
@@ -20,11 +22,12 @@ function DivCap(elems, doneFunc, errorFunc)
         {
             var self = this;
             $("body").scrollTop(elem.offset().top + -10);
-            console.log()
+            console.log("snip");
+            var ext = this.ext;
             // tell extension to take a screenshot after a short delay
             window.setTimeout(function() {
                 chrome.runtime.sendMessage(
-                    "bgigfngpiapeiicnamikpicikekkjcpi",
+                    ext,
                     {name: 'screenshot'}, 
                     handleChromeResponse.bind(self, elem)
                 );
