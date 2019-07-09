@@ -1,13 +1,12 @@
 function DivCap(elems, doneFunc, errorFunc)
 {
-    
+    this.ext = prompt("Copy and paste your Extension Developer ID here");
     this.elems = elems;
     //this.elems = elems.slice(0,4);
     this.zip = new JSZip();
     //this.dir = this.zip.folder("images");
     window.setTimeout(start.bind(this), 100);
-    var ext = prompt("Copy and paste your Extension Developer ID here: ");
-    this.ext = ext;
+
     var clearTypeTestElem = $('#cleartypetest');//<div id="cleartypetest">CLEARTYPE TEST</div>');
     clearTypeTestElem.show();
     //this.elems[this.elems.length-1].after(clearTypeTestElem);
@@ -18,18 +17,18 @@ function DivCap(elems, doneFunc, errorFunc)
     function start()
     {
         var elem = this.elems.pop();
+        var ext = this.ext;
         if (elem != null)
         {
             var self = this;
-            $("body").scrollTop(elem.offset().top + -10);
-            console.log("snip");
-            var ext = this.ext;
+            //$("body").scrollTop(elem.offset().top + -10);
+            window.scrollTo(0, elem.offset().top - 10)
             // tell extension to take a screenshot after a short delay
             window.setTimeout(function() {
                 chrome.runtime.sendMessage(
                     ext,
                     {name: 'screenshot'}, 
-                    handleChromeResponse.bind(self, elem)
+                    (s) => handleChromeResponse.bind(self, elem, s["screenshotUrl"])()
                 );
             }, 100);
         }
@@ -41,11 +40,11 @@ function DivCap(elems, doneFunc, errorFunc)
 
     function handleChromeResponse(elem, response)
     {
-        var imageUri = response.screenshotUrl;
+        var imageUri = response;
         var canvas = document.createElement('canvas');
         var img = new Image();
         var self = this;
-        console.log(self);
+        //console.log(self);
 
         img.onload = function() 
         {
@@ -66,10 +65,9 @@ function DivCap(elems, doneFunc, errorFunc)
                 console.log(numColors);
                 if (numColors != 2)
                 {
-                    //self.failedDueToClearTypeEnabled = true;
-                    //errorFunc();
-                    //return;
-                    alert("Either Font-Smoothing is on or Not in view");
+                    self.failedDueToClearTypeEnabled = true;
+                    errorFunc();
+                    return;
                 }
             }
             else
