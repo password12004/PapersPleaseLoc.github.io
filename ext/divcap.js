@@ -1,7 +1,9 @@
 function DivCap(elems, doneFunc, errorFunc)
 {
-    var ext = prompt("Please your extension ID Here: ");
-    this.ext = ext;
+    alert("DO NOT IGNORE THE NEXT COUPLE OF MESSAGES");
+    alert("Find your EXTENSION ID by going into chrome://extensions and looking for your extension, which underneath says ID:<LONGLISTOFCHARS>");
+    this.ext = prompt("Copy and paste your Extension Developer ID here");
+
     this.elems = elems;
     //this.elems = elems.slice(0,4);
     this.zip = new JSZip();
@@ -18,6 +20,7 @@ function DivCap(elems, doneFunc, errorFunc)
     function start()
     {
         var elem = this.elems.pop();
+        var ext = this.ext;
         if (elem != null)
         {
             var ext = this.ext;

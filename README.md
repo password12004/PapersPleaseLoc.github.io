@@ -1,4 +1,3 @@
 ### **Papers, Please** - Localization Tool
 
-https://ZetDude.github.io/PapersPleaseLoc
-
+https://password12004.github.io/PapersPleaseLoc.github.io/
